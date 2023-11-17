@@ -1,55 +1,49 @@
 package Steps;
 
+import Pages.BasePage;
+import Pages.MyAccountPage;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.util.concurrent.TimeUnit;
 
-public class RegistrationSteps {
-    public static WebDriver driver;
+public class RegistrationSteps  {
+    MyAccountPage map;
+public RegistrationSteps(){
+    map  =new MyAccountPage();
+}
     @Given("I am on the registration page")
-    public void i_am_on_the_registration_page(){
-        String url="https://abc9262.sg-host.com/";
-        System.setProperty(
-                "webdriver.chrome.driver",
-                "C:\\workspace 4\\AutomationRegistration\\chromedriver.exe");
-// Instantiate a ChromeDriver class.driver = new ChromeDriver();
-        driver=new ChromeDriver();
-        driver.get(url);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public void i_am_on_the_registration_page() {
+    map.open_chrome_browser();
     }
-
-
-
-
     @When("I enter a valid Username {string}")
     public void i_enter_a_valid_username(String string) {
-        driver.findElement(By.xpath("//*[@id=\"reg_username\"]")).sendKeys("Jon5D66oe123");
+    map.i_entered_valid_username("username");
 
     }
     @When("I enter a valid Email address {string}")
     public void i_enter_a_valid_email_address(String string) {
-        driver.findElement(By.xpath("//*[@id=\"reg_email\"]")).sendKeys("jo5hn66oe@example.com");
+    map.i_entered_valid_emaill("email");
 
     }
     @When("I enter a valid Password {string}")
     public void i_enter_a_valid_password(String string) {
-        driver.findElement(By.xpath("//*[@id=\"reg_password\"]")).sendKeys("joho567e@example.com");
+    map.i_entered_valid_password("password");
 
     }
     @When("I submit the registration form")
     public void i_submit_the_registration_form() {
-        driver.findElement(By.xpath("//*[@id=\"customer_login\"]/div[2]/form/p[4]/button")).click
-                ();
+    map.i_click_registration_button();
 
     }
     @Then("I should be automatically redirected to the customer login page")
     public void i_should_be_automatically_redirected_to_the_customer_login_page() {
-
+        System.out.println( "I should be automatically redirected to the customer login page" );
     }
 
 }
